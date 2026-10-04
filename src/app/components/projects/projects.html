@@ -1,0 +1,131 @@
+<section id="projects" class="section">
+  <div class="container">
+    <app-section-heading
+      eyebrow="projects"
+      title="Projects"
+      intro=".NET microservices, AI and RAG applications in Python, and production websites deployed on Microsoft Azure."
+    />
+
+    <div class="filters" role="group" aria-label="Filter projects by category" appReveal>
+      @for (f of filters; track f.key) {
+        <button
+          type="button"
+          class="filter"
+          [class.active]="filter() === f.key"
+          [attr.aria-pressed]="filter() === f.key"
+          (click)="filter.set(f.key)"
+        >
+          {{ f.label }}
+          <span class="count">{{ count(f.key) }}</span>
+        </button>
+      }
+    </div>
+
+    <div class="grid" aria-live="polite">
+      @for (project of visible(); track project.id) {
+        <article
+          class="project card"
+          [class.wide]="project.wide"
+          [class.live]="project.category === 'live'"
+          [attr.aria-labelledby]="project.id + '-title'"
+        >
+          @if (project.category === 'live') {
+            <!-- Browser-frame preview. Add a screenshot by setting `image` on the project in portfolio.data.ts. -->
+            <a class="preview" [href]="project.links[0].url" target="_blank" rel="noopener" tabindex="-1">
+              <div class="preview-bar" aria-hidden="true">
+                <i></i><i></i><i></i>
+                <span class="url">{{ project.domain }}</span>
+              </div>
+              <div class="preview-body">
+                @if (project.image) {
+                  <img
+                    [src]="project.image"
+                    [alt]="project.imageAlt ?? project.title + ' homepage screenshot'"
+                    width="1200"
+                    height="750"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                } @else {
+                  <app-icon name="globe" [size]="30" />
+                  <span>{{ project.title }}</span>
+                }
+              </div>
+            </a>
+          }
+
+          <div class="body">
+            <div class="meta">
+              <span class="badge" [class.badge-ai]="project.category === 'ai'">{{ labels[project.category] }}</span>
+              @if (project.subtitle) {
+                <span class="subtitle">{{ project.subtitle }}</span>
+              }
+            </div>
+
+            <h3 [id]="project.id + '-title'">{{ project.title }}</h3>
+
+            @if (project.highlights) {
+              <ul class="highlights">
+                @for (h of project.highlights; track $index) {
+                  <li>{{ h }}</li>
+                }
+              </ul>
+            } @else {
+              <p class="summary">{{ project.summary }}</p>
+            }
+
+            <div class="tech">
+              <span class="tech-label">Technologies</span>
+              <ul class="chip-list">
+                @for (t of project.tech; track t) {
+                  <li class="chip">{{ t }}</li>
+                }
+              </ul>
+            </div>
+
+            <div class="links">
+              @for (link of project.links; track link.url) {
+                <a
+                  class="btn btn-sm"
+                  [class.btn-primary]="link.primary"
+                  [class.btn-outline]="!link.primary"
+                  [href]="link.url"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <app-icon [name]="link.icon" [size]="16" />
+                  {{ link.label }}
+                </a>
+              }
+            </div>
+          </div>
+
+          @if (project.diagram) {
+            <div class="visual">
+              <app-diagram [type]="project.diagram" />
+            </div>
+          } @else if (project.features) {
+            <div class="visual">
+              <ul class="features">
+                @for (f of project.features; track f.title) {
+                  <li>
+                    <span class="icon-tile ai"><app-icon [name]="f.icon" [size]="18" /></span>
+                    <div>
+                      <strong>{{ f.title }}</strong>
+                      <p>{{ f.text }}</p>
+                    </div>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+        </article>
+      }
+    </div>
+
+    <p class="more-note" appReveal>
+      More of my code is on
+      <a [href]="github" target="_blank" rel="noopener">GitHub</a>.
+    </p>
+  </div>
+</section>

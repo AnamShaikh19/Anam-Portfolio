@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <title>Anam Shaikh | .NET Developer | Full-Stack Developer | AI & Python</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Anam Shaikh, .NET and Full-Stack Developer with hands-on experience in C#, ASP.NET Core, Angular, Python, REST APIs, and AI/ML-enabled software solutions. Based in Cottbus, Germany."
+    />
+    <meta name="author" content="Anam Shaikh" />
+    <meta name="theme-color" content="#0a0b14" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Anam Shaikh | .NET Developer | Full-Stack Developer | AI & Python" />
+    <meta
+      property="og:description"
+      content=".NET and Full-Stack Developer: C#, ASP.NET Core, Angular, Python, REST APIs, and AI/ML-enabled software solutions."
+    />
+    <meta property="og:image" content="images/profile.png" />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    />
+
+    <!-- Apply the saved (or system) theme before first paint to avoid a flash. -->
+    <script>
+      (function () {
+        var theme;
+        try {
+          theme = localStorage.getItem('theme');
+        } catch (e) {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+    <noscript>
+      <p style="padding: 24px; font-family: sans-serif">
+        Anam Shaikh, .NET Developer | Full-Stack Developer | AI &amp; Python. Please enable JavaScript to view this portfolio.
+      </p>
+    </noscript>
+  </body>
+</html>

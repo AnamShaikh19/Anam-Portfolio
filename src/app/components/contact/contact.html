@@ -1,0 +1,56 @@
+<section id="contact" class="section">
+  <div class="container">
+    <div class="panel card" appReveal>
+      <div class="glow" aria-hidden="true"></div>
+
+      <div class="intro">
+        <span class="eyebrow">// contact</span>
+        <h2>Let’s <span class="text-gradient">connect</span></h2>
+        <p class="lead">
+          I’m open to .NET Developer, Full-Stack Developer, and AI/Python roles. The quickest way to reach me is by email
+          or LinkedIn.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" [href]="'mailto:' + profile.email">
+            <app-icon name="mail" [size]="18" />
+            Email me
+          </a>
+          <a class="btn btn-outline" [href]="profile.cv" download>
+            <app-icon name="download" [size]="18" />
+            Download CV
+          </a>
+        </div>
+      </div>
+
+      <ul class="channels">
+        @for (c of channels; track c.label) {
+          <li>
+            @if (c.href) {
+              <a
+                class="channel"
+                [href]="c.href"
+                [attr.target]="c.external ? '_blank' : null"
+                [attr.rel]="c.external ? 'noopener' : null"
+              >
+                <span class="icon-tile"><app-icon [name]="c.icon" [size]="18" /></span>
+                <span class="text">
+                  <small>{{ c.label }}</small>
+                  <strong>{{ c.value }}</strong>
+                </span>
+                <app-icon class="go" [name]="c.external ? 'external' : 'arrowRight'" [size]="16" />
+              </a>
+            } @else {
+              <div class="channel">
+                <span class="icon-tile ai"><app-icon [name]="c.icon" [size]="18" /></span>
+                <span class="text">
+                  <small>{{ c.label }}</small>
+                  <strong>{{ c.value }}</strong>
+                </span>
+              </div>
+            }
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>

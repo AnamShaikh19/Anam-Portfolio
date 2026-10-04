@@ -1,0 +1,44 @@
+<section id="about" class="section">
+  <div class="container">
+    <app-section-heading eyebrow="about" title="About me" />
+
+    <div class="about-grid">
+      <div class="summary" appReveal>
+        <p>{{ profile.summary }}</p>
+      </div>
+
+      <dl class="facts card" appReveal="120">
+        @for (fact of facts; track fact.label) {
+          <div class="fact">
+            <span class="icon-tile"><app-icon [name]="fact.icon" [size]="18" /></span>
+            <div>
+              <dt>{{ fact.label }}</dt>
+              <dd>
+                @if (fact.href) {
+                  <a [href]="fact.href">{{ fact.value }}</a>
+                } @else {
+                  {{ fact.value }}
+                }
+              </dd>
+            </div>
+          </div>
+        }
+      </dl>
+    </div>
+
+    <div class="focus-grid">
+      @for (area of focusAreas; track area.title; let i = $index; let last = $last) {
+        <article class="focus card card-hover" [appReveal]="i * 100">
+          <span class="icon-tile" [class.ai]="last"><app-icon [name]="area.icon" [size]="22" /></span>
+          <h3>{{ area.title }}</h3>
+          <p>{{ area.text }}</p>
+          <ul class="chip-list">
+            @for (tag of area.tags; track tag) {
+              <li class="chip">{{ tag }}</li>
+            }
+          </ul>
+        </article>
+      }
+    </div>
+  </div>
+</section>

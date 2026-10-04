@@ -1,0 +1,74 @@
+<nav class="nav" [class.scrolled]="scrolled() || menuOpen()" aria-label="Main navigation">
+  <div class="container nav-inner">
+    <a class="brand" href="#top" (click)="closeMenu()" aria-label="{{ profile.name }}, back to top">
+      <span class="brand-mark">{{ profile.initials }}</span>
+      <span class="brand-name">{{ profile.name }}</span>
+    </a>
+
+    <ul class="nav-links">
+      @for (link of links; track link.id) {
+        <li>
+          <a [href]="'#' + link.id" [class.active]="active() === link.id">{{ link.label }}</a>
+        </li>
+      }
+    </ul>
+
+    <div class="nav-actions">
+      <a class="icon-btn hide-sm" [href]="profile.github" target="_blank" rel="noopener" aria-label="GitHub profile">
+        <app-icon name="github" [size]="18" />
+      </a>
+      <a class="icon-btn hide-sm" [href]="profile.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+        <app-icon name="linkedin" [size]="18" />
+      </a>
+      <button
+        type="button"
+        class="icon-btn"
+        (click)="themeService.toggle()"
+        [attr.aria-label]="themeService.theme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
+      >
+        <app-icon [name]="themeService.theme() === 'dark' ? 'sun' : 'moon'" [size]="18" />
+      </button>
+      <a class="btn btn-primary btn-sm hide-sm" [href]="profile.cv" download>
+        <app-icon name="download" [size]="16" />
+        Download CV
+      </a>
+      <button
+        type="button"
+        class="icon-btn menu-toggle"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="mobile-menu"
+        [attr.aria-label]="menuOpen() ? 'Close menu' : 'Open menu'"
+      >
+        <app-icon [name]="menuOpen() ? 'close' : 'menu'" [size]="18" />
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu" [class.open]="menuOpen()" [attr.inert]="menuOpen() ? null : ''">
+    <ul>
+      @for (link of links; track link.id) {
+        <li>
+          <a [href]="'#' + link.id" (click)="closeMenu()" [class.active]="active() === link.id">{{ link.label }}</a>
+        </li>
+      }
+    </ul>
+    <div class="mobile-actions">
+      <a class="btn btn-primary" [href]="profile.cv" download (click)="closeMenu()">
+        <app-icon name="download" [size]="18" />
+        Download CV
+      </a>
+      <div class="mobile-social">
+        <a class="icon-btn" [href]="profile.github" target="_blank" rel="noopener" aria-label="GitHub profile">
+          <app-icon name="github" [size]="18" />
+        </a>
+        <a class="icon-btn" [href]="profile.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+          <app-icon name="linkedin" [size]="18" />
+        </a>
+        <a class="icon-btn" [href]="'mailto:' + profile.email" aria-label="Send email">
+          <app-icon name="mail" [size]="18" />
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>

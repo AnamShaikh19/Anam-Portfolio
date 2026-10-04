@@ -1,0 +1,281 @@
+.hero {
+  position: relative;
+  min-height: min(100svh, 920px);
+  display: flex;
+  align-items: center;
+  padding-block: calc(var(--nav-height) + 48px) 96px;
+  overflow-x: clip;
+}
+
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+}
+
+.glow-violet {
+  width: 520px;
+  height: 520px;
+  top: -140px;
+  right: -60px;
+  background: var(--accent-glow);
+}
+
+.glow-teal {
+  width: 380px;
+  height: 380px;
+  bottom: 0;
+  left: -160px;
+  background: var(--ai-glow);
+}
+
+.hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  align-items: center;
+  gap: clamp(40px, 6vw, 80px);
+}
+
+.location {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  app-icon {
+    color: var(--ai);
+  }
+}
+
+h1 {
+  margin-top: 22px;
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.roles {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+  font-weight: 600;
+}
+
+.role {
+  color: var(--accent);
+
+  &.role-ai {
+    color: var(--ai);
+  }
+}
+
+.sep {
+  color: var(--text-faint);
+}
+
+.tagline {
+  margin-top: 22px;
+  max-width: 560px;
+  font-size: clamp(1.02rem, 1.6vw, 1.15rem);
+  color: var(--text-muted);
+}
+
+.cta {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.social {
+  margin-top: 30px;
+  display: flex;
+  gap: 10px;
+}
+
+/* ---- Photo ---- */
+
+.hero-visual {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 340px);
+}
+
+.photo-frame {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  border-radius: 28px;
+  padding: 6px;
+  background: linear-gradient(140deg, var(--accent-strong), color-mix(in srgb, var(--accent) 40%, var(--ai)) 60%, var(--ai));
+  box-shadow: 0 30px 60px -24px var(--accent-glow);
+
+  img,
+  .monogram {
+    width: 100%;
+    height: 100%;
+    border-radius: 23px;
+    background: var(--surface-2);
+  }
+
+  img {
+    object-fit: cover;
+    object-position: center 20%;
+  }
+
+  .monogram {
+    display: grid;
+    place-items: center;
+    font-family: var(--font-mono);
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+}
+
+.float-chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  animation: float 6s ease-in-out infinite;
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  &.ai .dot {
+    background: var(--ai);
+  }
+}
+
+.chip-1 {
+  top: 12%;
+  left: -18%;
+}
+
+.chip-2 {
+  top: 46%;
+  right: -16%;
+  animation-delay: -2s;
+}
+
+.chip-3 {
+  bottom: 8%;
+  left: -12%;
+  animation-delay: -4s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  translate: -50% 0;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  color: var(--text-faint);
+  animation: float 2.4s ease-in-out infinite;
+
+  &:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: auto;
+    padding-bottom: 88px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    order: -1;
+    width: min(62vw, 250px);
+  }
+
+  .hero-copy {
+    text-align: center;
+  }
+
+  .roles,
+  .cta,
+  .social {
+    justify-content: center;
+  }
+
+  .tagline {
+    margin-inline: auto;
+  }
+
+  .chip-1 {
+    left: -26%;
+  }
+
+  .chip-2 {
+    right: -26%;
+  }
+
+  .chip-3 {
+    left: -18%;
+  }
+}
+
+@media (max-width: 520px) {
+  .float-chip {
+    display: none;
+  }
+
+  .cta .btn {
+    flex: 1 1 100%;
+  }
+
+  .scroll-hint {
+    display: none;
+  }
+}

@@ -1,0 +1,79 @@
+<section id="top" class="hero">
+  <div class="glow glow-violet" aria-hidden="true"></div>
+  <div class="glow glow-teal" aria-hidden="true"></div>
+
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="location">
+        <app-icon name="pin" [size]="15" />
+        {{ profile.location }}
+      </p>
+
+      <h1>
+        Hi, I’m <span class="text-gradient">{{ profile.name }}</span>
+      </h1>
+
+      <p class="roles" aria-label="{{ profile.headline }}">
+        @for (role of roles; track role; let last = $last) {
+          <span class="role" [class.role-ai]="last">{{ role }}</span>
+          @if (!last) {
+            <span class="sep" aria-hidden="true">/</span>
+          }
+        }
+      </p>
+
+      <p class="tagline">{{ profile.tagline }}</p>
+
+      <div class="cta">
+        <a class="btn btn-primary" href="#projects">
+          View Projects
+          <app-icon name="arrowRight" [size]="18" />
+        </a>
+        <a class="btn btn-outline" [href]="profile.cv" download>
+          <app-icon name="download" [size]="18" />
+          Download CV
+        </a>
+        <a class="btn btn-ghost" href="#contact">Contact</a>
+      </div>
+
+      <div class="social">
+        <a class="icon-btn" [href]="profile.github" target="_blank" rel="noopener" aria-label="GitHub profile">
+          <app-icon name="github" [size]="18" />
+        </a>
+        <a class="icon-btn" [href]="profile.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+          <app-icon name="linkedin" [size]="18" />
+        </a>
+        <a class="icon-btn" [href]="'mailto:' + profile.email" aria-label="Send email">
+          <app-icon name="mail" [size]="18" />
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <!-- To use a higher-resolution photo, replace public/images/profile.png
+           (or change PROFILE.photo in src/app/data/portfolio.data.ts). -->
+      <figure class="photo-frame">
+        @if (!photoFailed()) {
+          <img
+            [src]="profile.photo"
+            [alt]="'Portrait of ' + profile.name"
+            width="400"
+            height="500"
+            fetchpriority="high"
+            (error)="photoFailed.set(true)"
+          />
+        } @else {
+          <span class="monogram" aria-hidden="true">{{ profile.initials }}</span>
+        }
+      </figure>
+
+      <span class="float-chip chip-1" aria-hidden="true"><i class="dot"></i>ASP.NET Core</span>
+      <span class="float-chip chip-2" aria-hidden="true"><i class="dot"></i>Angular</span>
+      <span class="float-chip chip-3 ai" aria-hidden="true"><i class="dot"></i>Python · RAG</span>
+    </div>
+  </div>
+
+  <a class="scroll-hint" href="#about" aria-label="Scroll to About section">
+    <app-icon name="arrowDown" [size]="18" />
+  </a>
+</section>

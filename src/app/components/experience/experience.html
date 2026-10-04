@@ -1,0 +1,60 @@
+<section id="experience" class="section">
+  <div class="container">
+    <app-section-heading eyebrow="experience" title="Professional Experience" />
+
+    <ol class="timeline">
+      @for (job of jobs; track job.company; let i = $index) {
+        <li class="entry" [class.current]="job.current" appReveal>
+          <span class="marker" aria-hidden="true"></span>
+
+          <article class="card">
+            <header class="entry-head">
+              <div>
+                <h3>{{ job.role }}</h3>
+                <p class="company">
+                  {{ job.company }}
+                  @if (job.location) {
+                    <span class="loc">· {{ job.location }}</span>
+                  }
+                </p>
+              </div>
+              <span class="badge period" [class.badge-ai]="job.current">
+                @if (job.current) {
+                  <i class="live-dot" aria-hidden="true"></i>
+                }
+                {{ job.period }}
+              </span>
+            </header>
+
+            <ul class="bullets" [id]="'job-' + i">
+              @for (bullet of job.bullets; track $index; let b = $index) {
+                @if (b < visible || isExpanded(i)) {
+                  <li>{{ bullet }}</li>
+                }
+              }
+            </ul>
+
+            @if (job.bullets.length > visible) {
+              <button
+                type="button"
+                class="more"
+                (click)="toggle(i)"
+                [attr.aria-expanded]="isExpanded(i)"
+                [attr.aria-controls]="'job-' + i"
+              >
+                {{ isExpanded(i) ? 'Show less' : 'Show ' + (job.bullets.length - visible) + ' more' }}
+                <app-icon name="chevronDown" [size]="16" [class.flip]="isExpanded(i)" />
+              </button>
+            }
+
+            <ul class="chip-list tags" aria-label="Technologies">
+              @for (tag of job.tags; track tag) {
+                <li class="chip">{{ tag }}</li>
+              }
+            </ul>
+          </article>
+        </li>
+      }
+    </ol>
+  </div>
+</section>

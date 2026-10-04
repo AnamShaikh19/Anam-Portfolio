@@ -1,0 +1,102 @@
+@switch (type()) {
+  @case ('ecommerce') {
+    <figure class="diagram ecommerce" aria-label="E-commerce platform architecture diagram">
+      <figcaption class="diagram-title"><span>architecture</span></figcaption>
+
+      <div class="node client">
+        <app-icon name="monitor" [size]="18" />
+        <div>
+          <strong>Client</strong>
+          <small>API consumer</small>
+        </div>
+      </div>
+
+      <span class="arrow down" aria-hidden="true"><app-icon name="arrowDown" [size]="16" /></span>
+
+      <div class="ecom-row">
+        <div class="cloud-box">
+          <span class="cloud-label">
+            <app-icon name="box" [size]="14" /> Docker
+            <span class="plus">+</span>
+            <app-icon name="cloud" [size]="14" /> Microsoft Azure
+          </span>
+
+          <div class="node api">
+            <app-icon name="shield" [size]="18" />
+            <div>
+              <strong>REST APIs</strong>
+              <small>JWT · OAuth2 authentication</small>
+            </div>
+          </div>
+
+          <span class="arrow down" aria-hidden="true"><app-icon name="arrowDown" [size]="16" /></span>
+
+          <div class="node services">
+            <div class="services-head">
+              <app-icon name="layers" [size]="18" />
+              <strong>ASP.NET Core Microservices</strong>
+            </div>
+            <ul class="patterns">
+              @for (p of servicePatterns; track p) {
+                <li>{{ p }}</li>
+              }
+            </ul>
+          </div>
+        </div>
+
+        <span class="arrow side" aria-hidden="true"><app-icon name="arrowRight" [size]="16" /></span>
+
+        <div class="node external">
+          <app-icon name="card" [size]="18" />
+          <div>
+            <strong>Stripe</strong>
+            <small>Payments &amp; refunds</small>
+          </div>
+        </div>
+      </div>
+    </figure>
+  }
+
+  @case ('rag') {
+    <figure class="diagram rag" aria-label="RAG pipeline diagram">
+      <figcaption class="diagram-title"><span>rag pipeline</span></figcaption>
+
+      <div class="lane">
+        <span class="lane-label">Indexing</span>
+        <ol class="flow">
+          @for (step of ragIndexing; track step.title; let last = $last) {
+            <li class="node step">
+              <app-icon [name]="step.icon" [size]="18" />
+              <strong>{{ step.title }}</strong>
+              <small>{{ step.sub }}</small>
+            </li>
+            @if (!last) {
+              <li class="arrow flow-arrow" aria-hidden="true"><app-icon name="arrowRight" [size]="14" /></li>
+            }
+          }
+        </ol>
+      </div>
+
+      <div class="lane query">
+        <span class="lane-label">Querying</span>
+        <ol class="flow">
+          @for (step of ragQuery; track step.title; let last = $last) {
+            <li class="node step" [class.ai]="step.title === 'LLM + Context'">
+              <app-icon [name]="step.icon" [size]="18" />
+              <strong>{{ step.title }}</strong>
+              <small>{{ step.sub }}</small>
+            </li>
+            @if (!last) {
+              <li class="arrow flow-arrow" aria-hidden="true"><app-icon name="arrowRight" [size]="14" /></li>
+            }
+          }
+        </ol>
+      </div>
+
+      <p class="ui-note">
+        <app-icon name="monitor" [size]="14" />
+        Interface built with <strong>Streamlit</strong>
+      </p>
+    </figure>
+  }
+}
